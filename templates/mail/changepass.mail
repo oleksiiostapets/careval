@@ -1,0 +1,12 @@
+<?from?>hello@example.com<?/from?>
+<?subject?>This is account verification message<?/?>
+<?body?>
+
+Dear <?$name?>,
+<br /><br />
+Your password has been changed by administrator<br />
+Use new password "<?$password?>" for signing in on the <a href="<?$link?>">page</a>.<br />
+Please change you password for the security reasons.
+
+<?sign?>
+<?/sign?><?/body?>

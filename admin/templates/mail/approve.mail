@@ -1,0 +1,10 @@
+<?from?>hello@example.com<?/from?>
+<?subject?>You account has been approved by administrator<?/?>
+<?body?>
+
+Dear <?$name?>,
+<br /><br />
+Your account has been approved by administrator<br />
+
+<?sign?>
+<?/sign?><?/body?>

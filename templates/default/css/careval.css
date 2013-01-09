@@ -1,0 +1,12 @@
+body {color:#092476;}
+
+/** Header *******************************************************************************************/
+.atk-wrapper {text-align:center;}
+#header {width:960px;margin:auto auto 1em;}
+#atk-logo {background:none;width:400px;height:187px;}
+
+/** Content ******************************************************************************************/
+.g-row,
+.page_register {width:960px;margin:auto;text-align:left;}
+
+.ui-buttonset {text-align:left;}
