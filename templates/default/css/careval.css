@@ -6,7 +6,23 @@ body {color:#092476;}
 #atk-logo {background:none;width:400px;height:187px;}
 
 /** Content ******************************************************************************************/
+.cc {height:0;width:0;overflow:hidden;clear:both;}
 .g-row,
 .page_register {width:960px;margin:auto;text-align:left;}
 
 .ui-buttonset {text-align:left;}
+
+#CarEval_evaluations_add_form_evaluation_make_htmlelement .ui-button,
+#CarEval_evaluations_add_form_evaluation_mod_htmlelement .ui-button {height:20px;margin-top:4px;}
+#CarEval_evaluations_add_form_evaluation_make_htmlelement .ui-button span,
+#CarEval_evaluations_add_form_evaluation_mod_htmlelement .ui-button span {padding-top:0.1em;}
+
+#CarEval_evaluations_add_form_evaluation_form .atk-form-row-dropdown .f_dropdown {width:767px;}
+
+#CarEval_evaluations_add_form_evaluation_form fieldset {position:relative;}
+#CarEval_evaluations_add_form_evaluation_form .add_make {position:absolute;left:872px;top:6px;height:20px;}
+#CarEval_evaluations_add_form_evaluation_form .add_model {position:absolute;left:872px;top:46px;height:20px;}
+#CarEval_evaluations_add_form_evaluation_form .add_make span,
+#CarEval_evaluations_add_form_evaluation_form .add_model span {padding-top:0.1em;}
+#CarEval_evaluations_add_form_evaluation_form input[type="text"] {width:800px;}
+#CarEval_evaluations_add_form_evaluation_form textarea {width:800px;}

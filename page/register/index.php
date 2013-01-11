@@ -66,8 +66,6 @@ class Form_Register extends Form {
 		
 		// If form valid - save user
 		if ($is_form_valid) {
-			$this->getModel()->set('created', date('Y-m-d G:i:s',time()));
-			
 			// Set encrypted password
 	        $this->getModel()->set('password', $this->api->auth->encryptPassword($this->get('password_1'),$this->get('email')));
 

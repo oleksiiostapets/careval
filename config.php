@@ -5,6 +5,8 @@ $config['dsn']='mysql://root:@localhost/careval';
 
 $config['tmail']['from'] = 'test@example.com';
 
+$config['admin']['email'] = 'olexii.ostapets@gmail.com';
+
 $config['url_prefix']='';
 $config['url_postfix']='';
 

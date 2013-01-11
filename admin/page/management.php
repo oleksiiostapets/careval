@@ -9,6 +9,7 @@ class page_management extends Page {
 		// Creating management tabs
 		$tabs = $this->add('Tabs');
 
+// Tab users *************************/
 		$tab = $tabs->addTab('Users');
 
 		$user_crud=$tab->add('CRUD');
@@ -39,6 +40,7 @@ class page_management extends Page {
 				$mail->loadTemplate('changepass');
 				$mail->setTag('name',$um->get('name'));
 				$mail->setTag('password',$password);
+				$mail->setTag('link','http://'.$_SERVER['HTTP_HOST'].'/');
 				$mail->send($um->get('email'));
 				
 				$um->saveAndUnload();
@@ -47,6 +49,68 @@ class page_management extends Page {
 			}			
 			$user_crud->grid->addClass('zebra bordered');
 		}
+
+// Tab makes *************************/
+		
+		$tab = $tabs->addTab('Makes');
+		$make_crud=$tab->add('CRUD',array('allow_add'=>true,'allow_edit'=>true,'allow_del'=>true));
+
+		$model_make = $this->add('Model_Make');
+		
+		$make_crud->setModel($model_make, array('name','models_count'));
+		
+		if($make_crud->grid){
+			$make_crud->grid->addPaginator();
+
+			$make_crud->grid->addClass('zebra bordered');
+		}
+				
+// Tab models *************************/
+		
+		$tab = $tabs->addTab('Models');
+		$mod_crud=$tab->add('CRUD',array('allow_add'=>false,'allow_edit'=>true,'allow_del'=>true));
+		
+		$model_mod = $this->add('Model_Mod');
+		
+		$mod_crud->setModel($model_mod, array('make_name','name','cars_count'));
+		
+		if($mod_crud->grid){
+			$mod_crud->grid->addPaginator();
+		
+			$mod_crud->grid->addClass('zebra bordered');
+		}
+		
+// Tab cars *************************/
+		
+		$tab = $tabs->addTab('Cars');
+		$car_crud=$tab->add('CRUD',array('allow_add'=>false,'allow_edit'=>true,'allow_del'=>true));
+		
+		$model_car = $this->add('Model_Car');
+		
+		$car_crud->setModel($model_car, array('make_name','model_name','year','regnumber','evaluations_count'));
+		
+		if($car_crud->grid){
+			$car_crud->grid->addPaginator();
+		
+			$car_crud->grid->addClass('zebra bordered');
+		}
+		
+// Tab evaluations *************************/
+		
+		$tab = $tabs->addTab('Evaluations');
+		$evaluations_crud=$tab->add('CRUD',array('allow_add'=>false,'allow_edit'=>true,'allow_del'=>true));
+		
+		$model_evaluations = $this->add('Model_Evaluation');
+		
+		$evaluations_crud->setModel($model_evaluations, array('user','make_name','model_name','year','regnumber','value','description','created'));
+		
+		if($evaluations_crud->grid){
+			$evaluations_crud->grid->addPaginator();
+		
+			$evaluations_crud->grid->addClass('zebra bordered');
+		}
+		
 	}
 
+	
 }

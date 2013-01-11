@@ -6,14 +6,12 @@ class Admin extends ApiFrontend {
         $this->requires('atk','4.2.0');
 
 
-
         $this->pathfinder->addLocation('.',array(
-        //		'addons'=>array('atk4-addons','addons'),
+        		'addons'=>array('atk4-addons','addons'),
         		'php'=>array('shared'),
-        //		'css'=>'templates/thevillagesite2/css',
-        //		'js'=>'templates/js',
-        ))
-        ->setParent($this->pathfinder->base_location);
+        		'js'=>'templates/js',
+	        ))
+	        ->setParent($this->pathfinder->base_location);
         
         $this->add('jUI');
         

@@ -8,6 +8,7 @@ class page_login extends Page {
         $form->addField('line','login');
         $form->addField('password','password');
         $form->addSubmit('Login');
+        $form->addButton('Forgot password')->js('click')->univ()->location($this->api->getDestinationURL('forgot'));
         $form->addButton('Sign up')->js('click')->univ()->location($this->api->getDestinationURL('register/index'));
         
         if($form->isSubmitted()){

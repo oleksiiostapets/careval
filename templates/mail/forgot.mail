@@ -1,10 +1,8 @@
 <?from?>hello@example.com<?/from?>
-<?subject?>This is account verification message<?/?>
+<?subject?>Your password was changed<?/?>
 <?body?>
 
-Dear <?$name?>,
-<br /><br />
-Your password has been changed by administrator<br />
+Your password has been changed because of using "forgot password" functionality"<br />
 Use new password "<?$password?>" for signing in on the <a href="<?$link?>">page</a>.<br />
 Please change you password for the security reasons.
 

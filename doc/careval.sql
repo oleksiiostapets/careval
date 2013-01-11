@@ -26,10 +26,11 @@ CREATE TABLE `car` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `regnumber` varchar(32) DEFAULT NULL,
   `mod_id` int(11) NOT NULL,
+  `year` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_car_model1` (`mod_id`),
-  CONSTRAINT `fk_car_model1` FOREIGN KEY (`mod_id`) REFERENCES `mod` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_car_mod1` (`mod_id`),
+  CONSTRAINT `fk_car_mod1` FOREIGN KEY (`mod_id`) REFERENCES `mod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +39,7 @@ CREATE TABLE `car` (
 
 LOCK TABLES `car` WRITE;
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
+INSERT INTO `car` VALUES (19,'KK1122EE',2,'2010'),(20,'E0124CK',4,'1971');
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,12 +55,14 @@ CREATE TABLE `evaluation` (
   `value` varchar(64) DEFAULT NULL,
   `car_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `description` text,
   PRIMARY KEY (`id`),
   KEY `fk_evaluation_car1` (`car_id`),
   KEY `fk_evaluation_user1` (`user_id`),
-  CONSTRAINT `fk_evaluation_car1` FOREIGN KEY (`car_id`) REFERENCES `car` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_evaluation_car1` FOREIGN KEY (`car_id`) REFERENCES `car` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_evaluation_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +71,7 @@ CREATE TABLE `evaluation` (
 
 LOCK TABLES `evaluation` WRITE;
 /*!40000 ALTER TABLE `evaluation` DISABLE KEYS */;
+INSERT INTO `evaluation` VALUES (34,'15000',19,2,'2013-01-11 13:31:46','Good Car!'),(35,'100',20,2,'2013-01-11 13:32:48','WOW!!!'),(36,'14000',19,2,'2013-01-11 13:34:06','');
 /*!40000 ALTER TABLE `evaluation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,8 +85,9 @@ DROP TABLE IF EXISTS `make`;
 CREATE TABLE `make` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
+  `reviewed` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +96,7 @@ CREATE TABLE `make` (
 
 LOCK TABLES `make` WRITE;
 /*!40000 ALTER TABLE `make` DISABLE KEYS */;
-INSERT INTO `make` VALUES (1,'Volvo'),(2,'Mercedes'),(3,'WV');
+INSERT INTO `make` VALUES (1,'Volvo',1),(2,'Mercedes',1),(3,'WV',1),(16,'ZAZ',1);
 /*!40000 ALTER TABLE `make` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,10 +111,11 @@ CREATE TABLE `mod` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
   `make_id` int(11) NOT NULL,
+  `reviewed` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_mod_make1` (`make_id`),
-  CONSTRAINT `fk_mod_make1` FOREIGN KEY (`make_id`) REFERENCES `make` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_mod_make1` FOREIGN KEY (`make_id`) REFERENCES `make` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +124,7 @@ CREATE TABLE `mod` (
 
 LOCK TABLES `mod` WRITE;
 /*!40000 ALTER TABLE `mod` DISABLE KEYS */;
-INSERT INTO `mod` VALUES (1,'V5100',1),(2,'V6100',1),(3,'S600',2),(4,'S500',2),(5,'Test1',1);
+INSERT INTO `mod` VALUES (1,'968M',16,NULL),(2,'S600',2,NULL),(4,'S500',2,NULL),(5,'V1001',1,NULL);
 /*!40000 ALTER TABLE `mod` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +148,7 @@ CREATE TABLE `user` (
   `verification` varchar(254) DEFAULT NULL,
   `is_verified` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +157,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,'Alexey Ostapets','alf.moc@gmail.com','007d55a5fe7b054a2e8118b1a55f86679e38c954209b8f674c4a11af7e20adf6','Agile','0123456789','2013-01-08 13:47:44',1,'1',1),(2,NULL,'Test','t@t.t','7dd1f1c4a2de48464b17a58913683c7ecd4a98738525b2cf070d5773c5d1447c',NULL,NULL,NULL,1,NULL,1);
+INSERT INTO `user` VALUES (1,1,'Alexey Ostapets','alf.moc@gmail.com','007d55a5fe7b054a2e8118b1a55f86679e38c954209b8f674c4a11af7e20adf6','Agile','0123456789','2013-01-08 13:47:44',1,'1',1),(2,NULL,'Test','t@t.t','7dd1f1c4a2de48464b17a58913683c7ecd4a98738525b2cf070d5773c5d1447c',NULL,NULL,'2013-01-11 16:57:21',1,NULL,1),(3,NULL,'Test2','t2@t.t','5963a30f18786135bf2ef634eafea7ceedbaeb972e6e552f2aad1979a2ee0893','','','2013-01-11 11:56:01',1,'2dd478e04c9b79eb8c26d5c54b32e481',1),(6,NULL,'Test3','t3@t.t','b134b8e2369a8624ca5441a0d28405f84720075be54ff44e4d5a5a41da6bb3a8','','','2013-01-11 17:28:16',1,'fbc240ec0beb943de17877d9ba0f2bdf',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -163,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-01-09 13:33:44
+-- Dump completed on 2013-01-11 17:29:58
